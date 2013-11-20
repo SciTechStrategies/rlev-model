@@ -3,6 +3,10 @@ Research Level Classifier
 
 Predict research level from text: http://www.sciencedirect.com/science/article/pii/S1751157713000825
 
+Any use of this code should reference the following article:
+
+Boyack, K. W., Patek, M., Ungar, L. H., Yoon, P., & Klavans, R. (2014). Classification of individual articles from all of science by research level. Journal of Informetrics, 18(1), 1-12. (DOI: 10.1016/j.joi.2013.10.005)
+
 Installing
 ----------
 
