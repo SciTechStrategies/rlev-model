@@ -64,14 +64,14 @@ def get_pid_abstr_title_features(
     title_features is a map from words to feature ids
     """
     pid_abstr_feat = gen_pid_word_features(
-            gen_pid_words(pid_abstr), abstr_features
-            )
+        gen_pid_words(pid_abstr), abstr_features
+    )
     pid_title_feat = gen_pid_word_features(
-            gen_pid_words(pid_title), title_features
-            )
+        gen_pid_words(pid_title), title_features
+    )
     return consolidate_pid_word_features([
         pid_abstr_feat, pid_title_feat
-        ])
+    ])
 
 
 def test_get_words():
@@ -92,7 +92,7 @@ def test_find_word_features():
     features = {"excellent": 0, "good": 1, "great": 2, "ok": 3}
     words = set([
         "this", "is", "some", "good", "text", "or", "just", "ok",
-        ])
+    ])
     word_features = find_word_features(words, features)
     assert len(word_features) == 2
     assert 1 in word_features
@@ -102,9 +102,9 @@ def test_find_word_features():
 def test_gen_pid_words():
     """ Test the gen_pid_words function. """
     pid_text = [
-            [12345, "This is Some ok Text.  Or is it good text?"],
-            [23456, "Better text comes next.  Maybe not."],
-            ]
+        [12345, "This is Some ok Text.  Or is it good text?"],
+        [23456, "Better text comes next.  Maybe not."],
+    ]
     pid_words = [x for x in gen_pid_words(pid_text)]
     assert len(pid_words) == 2
     assert len(pid_words[0]) == 2
@@ -132,11 +132,11 @@ def test_gen_pid_words():
 def test_gen_pid_word_features():
     """ Test the gen_pid_word_features function. """
     pid_words = [
-            [12345, set([
-                "this", "is", "some", "ok", "text", "or", "it", "good"
-                ])],
-            [23456, set(["better", "text", "comes", "next", "maybe", "not"])],
-            ]
+        [12345, set([
+            "this", "is", "some", "ok", "text", "or", "it", "good"
+        ])],
+        [23456, set(["better", "text", "comes", "next", "maybe", "not"])],
+    ]
     features = {"excellent": 0, "good": 1, "great": 2, "ok": 3}
     pid_features = [x for x in gen_pid_word_features(pid_words, features)]
     assert len(pid_features) == 2
@@ -152,14 +152,14 @@ def test_gen_pid_word_features():
 
 def test_consolidate_pid_word_features():
     pid_features_1 = [
-            [12345, set([1, 2, 3])],
-            [23456, set([2, 3])],
-            ]
+        [12345, set([1, 2, 3])],
+        [23456, set([2, 3])],
+    ]
     pid_features_2 = [
-            [12345, set([1, 5])],
-            [23456, set()],
-            [34567, set([3, 4])],
-            ]
+        [12345, set([1, 5])],
+        [23456, set()],
+        [34567, set([3, 4])],
+    ]
     result = consolidate_pid_word_features([pid_features_1, pid_features_2])
     assert len(result) == 3
     assert result[12345] == set([1, 2, 3, 5])
@@ -172,27 +172,28 @@ def test_get_pid_abstr_title_features():
     Test the get_pid_abstr_title_features function.
     """
     pid_abstr = [
-            [12345, "My abstract it is good. It is great. OK?"],
-            [23456, "My abstract is great. it is also ok."],
-            ]
+        [12345, "My abstract it is good. It is great. OK?"],
+        [23456, "My abstract is great. it is also ok."],
+    ]
     abstr_features = {
-            "good": 1,
-            "great": 2,
-            "ok": 3,
-            }
+        "good": 1,
+        "great": 2,
+        "ok": 3,
+    }
     pid_title = [
-            [12345, "This title is really nice."],
-            [23456, "I think this title smells funny"],
-            [34567, "What an excellent title.  Great stuff."],            ]
+        [12345, "This title is really nice."],
+        [23456, "I think this title smells funny"],
+        [34567, "What an excellent title.  Great stuff."],
+    ]
     title_features = {
-            "really": 4,
-            "excellent": 5,
-            "great": 6,
-            "nice": 7,
-            }
+        "really": 4,
+        "excellent": 5,
+        "great": 6,
+        "nice": 7,
+    }
     result = get_pid_abstr_title_features(
-            pid_abstr, abstr_features, pid_title, title_features
-            )
+        pid_abstr, abstr_features, pid_title, title_features
+    )
     assert len(result) == 3
     assert result[12345] == set([1, 2, 3, 4, 7])
     assert result[23456] == set([2, 3])
