@@ -1,4 +1,4 @@
-rlev-model
+Research Level Classifier
 ==========
 
 Predict research level from text: http://www.sciencedirect.com/science/article/pii/S1751157713000825
