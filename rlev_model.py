@@ -1,10 +1,11 @@
 """SciTechStrategies Research Level Model
 
 Usage:
-  rlev_model.py <infile>
+  rlev_model.py <infile> [--encoding=<encoding>]
 
 Options:
-  -h --help  Show this screen
+  -h --help              Show this screen
+  --encoding=<encoding>  The encoding of the input text. Default is ISO-8859-2
 """
 
 import codecs
@@ -48,13 +49,13 @@ def get_abstract_features():
     return unpickle('abstract_features')
 
 
-def csv_field_gen(infile):
+def csv_field_gen(infile, encoding=ENCODING):
     """ Generate fields from csv file. """
-    for line in codecs.open(infile, 'r', ENCODING):
+    for line in codecs.open(infile, 'r', encoding):
         yield line.rstrip().split(DELIMITER)
 
 
-def get_id_features(infile):
+def get_id_features(infile, encoding=ENCODING):
     """ Returns a map from id to features.
 
     infile is a 3-column, delimited csv file
@@ -63,12 +64,12 @@ def get_id_features(infile):
     third column is abstract
     """
     def id_abstr_gen():
-        for fields in csv_field_gen(infile):
+        for fields in csv_field_gen(infile, encoding=encoding):
             if len(fields) == 3:
                 yield fields[0], fields[2]
 
     def id_title_gen():
-        for fields in csv_field_gen(infile):
+        for fields in csv_field_gen(infile, encoding=encoding):
             if len(fields) == 3:
                 yield fields[0], fields[1]
 
@@ -127,11 +128,11 @@ def get_id_probs(id_features):
     return id_probs
 
 
-def get_id_probs_from_file(infile):
+def get_id_probs_from_file(infile, encoding=ENCODING):
     """
     Calculate probabilities for each item found in infile.
     """
-    id_features = get_id_features(infile)
+    id_features = get_id_features(infile, encoding=encoding)
     return get_id_probs(id_features.items())
 
 
@@ -148,7 +149,10 @@ def main(arguments):
     """
     Print out rlev probabilities for data from input file.
     """
-    id_probs = get_id_probs_from_file(arguments['<infile>'])
+    encoding = ENCODING
+    if arguments['--encoding']:
+        encoding = arguments['--encoding']
+    id_probs = get_id_probs_from_file(arguments['<infile>'], encoding=encoding)
     print_id_probs(id_probs.items())
 
 
