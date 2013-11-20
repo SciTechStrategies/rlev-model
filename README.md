@@ -7,6 +7,11 @@ Any use of this code should reference the following article:
 
 Boyack, K. W., Patek, M., Ungar, L. H., Yoon, P., & Klavans, R. (2014). Classification of individual articles from all of science by research level. Journal of Informetrics, 18(1), 1-12. (DOI: 10.1016/j.joi.2013.10.005)
 
+Word-feature weights are contained in the data/word_features.txt.gz file.
+File is tab-delimited text with 3 columns: research-level, feature, weight.
+Features are of the form `t:word` or `a:word`,
+where `t` denotes a title word feature, and `a` denotes an abstract word feature.
+
 Installing
 ----------
 
