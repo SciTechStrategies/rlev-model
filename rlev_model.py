@@ -21,7 +21,7 @@ from word_feature_util import get_pid_abstr_title_features
 
 
 DATA_DIR = "data"
-ENCODING = "utf-8"
+ENCODING = "ISO-8859-2"
 DELIMITER = u"\t"
 MIN_N_FEAT = 2
 MAX_N_FEAT = None
