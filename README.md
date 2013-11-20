@@ -34,4 +34,9 @@ You should be able to run the classifier like this:
 Output is written to `stdout` and is tab-delimited text with 5 columns: id, prob1, prob2, prob3, prob4.
 Here prob1 is the probability that the document belongs to research-level 1, and so on.
 
-You may need to change the `ENCODING` parameter in `rlev_model.py` to account for the input character encoding.
+If you see `UnicodeDecodeError`, you may need to set the `--encoding` parameter to account for the
+input character encoding. For example:
+
+    $ python rlev_model.py filename.txt --encoding=utf-8
+    
+
